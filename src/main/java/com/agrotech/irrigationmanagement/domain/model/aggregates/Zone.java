@@ -1,0 +1,37 @@
+package com.agrotech.irrigationmanagement.domain.model.aggregates;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Getter
+@Setter
+@With
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Zone {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "tx_name", length = 40)
+    private String name;
+    @Column(name = "tx_created_at")
+    private LocalDateTime createdAt;
+    @Column(name = "tx_update_at")
+    private LocalDateTime updatedAt;
+    @Column(name = "tx_water_amount")
+    private Double waterAmount;
+
+    @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Device> devices;
+
+    @ManyToOne
+    @JoinColumn(name = "rice_crop_id")
+    private RiceCrop riceCrop;
+
+    public Zone(Long id, String name, LocalDateTime localDateTime, LocalDateTime localDateTime1, Double aDouble) {
+    }
+}
