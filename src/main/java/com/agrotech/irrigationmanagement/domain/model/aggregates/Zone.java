@@ -16,13 +16,13 @@ public class Zone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tx_name", length = 40)
+    @Column(name = "name", length = 40)
     private String name;
-    @Column(name = "tx_created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "tx_update_at")
+    @Column(name = "update_at")
     private LocalDateTime updatedAt;
-    @Column(name = "tx_water_amount")
+    @Column(name = "water_amount")
     private Double waterAmount;
 
     @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL, orphanRemoval = true)

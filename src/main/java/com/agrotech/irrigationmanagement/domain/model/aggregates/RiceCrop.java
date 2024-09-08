@@ -16,15 +16,15 @@ public class RiceCrop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tx_name", length = 40)
+    @Column(name = "name", length = 40)
     private String name;
-    @Column(name = "tx_status", length = 40)
+    @Column(name = "status", length = 40)
     private String status;
-    @Column(name = "tx_created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "tx_update_at")
+    @Column(name = "update_at")
     private LocalDateTime updatedAt;
-    @Column(name = "tx_farmer_id")
+    @Column(name = "farmer_id")
     private Long farmerId;
 
     @OneToMany(mappedBy = "riceCrop", cascade = CascadeType.ALL, orphanRemoval = true)

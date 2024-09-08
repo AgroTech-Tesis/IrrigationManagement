@@ -7,6 +7,6 @@ import com.agrotech.irrigationmanagement.domain.model.commands.CreateZoneCommand
 
 public class IrrigationScheduleFromCreateIrrigationScheduleCommand {
     public static IrrigationSchedule toResourceFromEntity(CreateIrrigationScheduleCommand entity) {
-        return new IrrigationSchedule(null, entity.irrigationTime(), entity.irrigationDate(), entity.name());
+        return new IrrigationSchedule(null, entity.irrigationTime(), entity.irrigationDate(), entity.name(), entity.status());
     }
 }

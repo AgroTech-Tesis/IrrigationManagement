@@ -16,11 +16,11 @@ public class SensorDataRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tx_created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "tx_last_value", length = 60)
+    @Column(name = "tx_last_value")
     private Float lastValue;
-    @Column(name = "tx_type_sensor", length = 60)
+    @Column(name = "type_sensor", length = 60)
     private String typeSensor;
 
     @ManyToOne

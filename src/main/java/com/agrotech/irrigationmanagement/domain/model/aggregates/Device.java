@@ -16,19 +16,19 @@ public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tx_device_name", length = 40)
+    @Column(name = "device_name", length = 40)
     private String deviceName;
-    @Column(name = "tx_device_model", length = 40)
+    @Column(name = "device_model", length = 40)
     private String deviceModel;
-    @Column(name = "tx_created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "tx_update_at")
+    @Column(name = "update_at")
     private LocalDateTime updatedAt;
-    @Column(name = "tx_is_on", length = 40)
+    @Column(name = "is_on", length = 40)
     private String isOn;
-    @Column(name = "tx_status")
+    @Column(name = "status")
     private String status;
-    @Column(name = "tx_media", length = 40)
+    @Column(name = "media", length = 40)
     private String media;
 
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
