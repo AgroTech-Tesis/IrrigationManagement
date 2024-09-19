@@ -32,8 +32,8 @@ public class IrrigationScheduleController {
 
     @GetMapping("/rice-crops/{riceCropId}")
     @Operation(tags = {"IrrigationSchedule"})
-    public ResponseEntity<List<IrrigationScheduleResource>> getAllIrrigationScheduleByRiceCropId(@PathVariable("riceCropId") Long riceCropId){
-        var getAllIrrigationScheduleByRiceCropIdQuery = new GetAllIrrigationScheduleByRiceCropIdQuery(riceCropId);
+    public ResponseEntity<List<IrrigationScheduleResource>> getAllIrrigationScheduleByRiceCropId(@PathVariable("riceCropId") Long riceCropId, @RequestParam(value = "status", required = false) String status){
+        var getAllIrrigationScheduleByRiceCropIdQuery = new GetAllIrrigationScheduleByRiceCropIdQuery(riceCropId, status);
         var irrigationList = irrigationScheduleQueryService.handle(getAllIrrigationScheduleByRiceCropIdQuery);
 
         var irrigationScheduleResources = irrigationList.stream().map(IrrigationScheduleResourceFromEntityAssembler::toResourceFromEntity).toList();

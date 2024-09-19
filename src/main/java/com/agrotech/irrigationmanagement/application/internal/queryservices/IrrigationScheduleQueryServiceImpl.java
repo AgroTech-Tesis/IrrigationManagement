@@ -35,7 +35,7 @@ public class IrrigationScheduleQueryServiceImpl implements IrrigationScheduleQue
         if(riceCrop == null)
             throw new IllegalArgumentException("rice crop not found");
         try{
-            return irrigationScheduleRepository.findAllByRiceCropId(query.riceCropId());
+            return irrigationScheduleRepository.findAllByRiceCropIdAndStatus(query.riceCropId(), query.status());
         }catch (Exception e){
             throw new IllegalArgumentException("Error: ", e);
         }

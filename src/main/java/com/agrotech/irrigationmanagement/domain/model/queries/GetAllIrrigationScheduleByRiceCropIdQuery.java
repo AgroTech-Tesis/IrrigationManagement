@@ -1,4 +1,4 @@
 package com.agrotech.irrigationmanagement.domain.model.queries;
 
-public record GetAllIrrigationScheduleByRiceCropIdQuery(Long riceCropId) {
+public record GetAllIrrigationScheduleByRiceCropIdQuery(Long riceCropId, String status) {
 }
