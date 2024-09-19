@@ -45,7 +45,7 @@ public class DeviceController {
         return ResponseEntity.ok(deviceResources);
     }
 
-    @PostMapping("/zone")
+    @PostMapping("/zones")
     @Operation(tags = {"Device"})
     public ResponseEntity<DeviceResource> createReview(@RequestBody CreateDeviceResource createDeviceResource){
         var createDeviceCommand = CreateDeviceCommandFromResourceAssembler.toResourceFromEntity(createDeviceResource);

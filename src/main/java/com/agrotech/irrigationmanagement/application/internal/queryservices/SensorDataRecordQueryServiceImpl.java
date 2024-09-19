@@ -32,7 +32,7 @@ public class SensorDataRecordQueryServiceImpl implements SensorDataRecordQuerySe
                 .map(tuple -> new SensorDataRecordListAverage(
                         tuple.get(0, Long.class),
                         tuple.get(1, LocalDateTime.class),
-                        tuple.get(2, Double.class),
+                        tuple.get(2, Float.class),
                         tuple.get(3, String.class),
                         tuple.get(4, Long.class),
                         tuple.get(5, String.class),
@@ -51,7 +51,7 @@ public class SensorDataRecordQueryServiceImpl implements SensorDataRecordQuerySe
             // Si no existe el tipo de sensor para ese dispositivo, lo creamos
             deviceSensorValues.get(deviceId).putIfAbsent(sensorType, new ArrayList<>());
             // Añadimos el valor del sensor al tipo de sensor correspondiente del dispositivo
-            deviceSensorValues.get(deviceId).get(sensorType).add(sensorDataRecord.getLastValue());
+            deviceSensorValues.get(deviceId).get(sensorType).add((double) sensorDataRecord.getLastValue());
         });
 
         // Lista para almacenar los promedios por dispositivo

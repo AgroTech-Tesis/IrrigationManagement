@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 public class SensorDataRecordListAverage {
     private Long id;
     private LocalDateTime createdAt;
-    private Double lastValue;
+    private Float lastValue;
     private String typeSensor;
     private Long sensorId;
     private String deviceId;
     private String name;
 
-    public SensorDataRecordListAverage(Long id, LocalDateTime createdAt, Double lastValue, String typeSensor, Long sensorId, String deviceId, String name) {
+    public SensorDataRecordListAverage(Long id, LocalDateTime createdAt, Float lastValue, String typeSensor, Long sensorId, String deviceId, String name) {
         this.id = id;
         this.createdAt = createdAt;
         this.lastValue = lastValue;
@@ -35,7 +35,7 @@ public class SensorDataRecordListAverage {
         return createdAt;
     }
 
-    public Double getLastValue() {
+    public Float getLastValue() {
         return lastValue;
     }
 
