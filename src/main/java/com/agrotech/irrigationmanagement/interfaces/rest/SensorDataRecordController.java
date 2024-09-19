@@ -1,5 +1,6 @@
 package com.agrotech.irrigationmanagement.interfaces.rest;
 
+import com.agrotech.irrigationmanagement.domain.model.aggregates.SensorDataRecordAverage;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetNotificationAllQuery;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetSensorDataRecordAllQuery;
 import com.agrotech.irrigationmanagement.domain.services.SensorDataRecordQueryService;
@@ -24,7 +25,7 @@ public class SensorDataRecordController {
 
     @GetMapping("/pagination")
     @Operation(tags = {"SensorDataRecord"})
-    public ResponseEntity<List<SensorDataRecordResource>> G(@RequestParam(name = "startDate", required = false) String startDate,
+    public ResponseEntity<List<SensorDataRecordResource>> pagination(@RequestParam(name = "startDate", required = false) String startDate,
                             @RequestParam(name = "endDate", required = false) String endDate,
                             @RequestParam(name = "zoneId", required = false) String zoneId,
                             @RequestParam(name = "typeSensor", required = false) String typeSensor){
@@ -33,5 +34,11 @@ public class SensorDataRecordController {
 
         var sensorDataRecordResources = sensorDataList.stream().map(SensorDataRecordMapperResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(sensorDataRecordResources);
+    }
+    @GetMapping("/average")
+    @Operation(tags = {"SensorDataRecord"})
+    public ResponseEntity<List<SensorDataRecordAverage>> average(){
+        var sensorDataList = sensorDataRecordService.handle();
+        return ResponseEntity.ok(sensorDataList);
     }
 }

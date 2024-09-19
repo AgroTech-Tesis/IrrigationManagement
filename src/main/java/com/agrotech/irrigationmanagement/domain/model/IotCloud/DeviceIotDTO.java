@@ -12,7 +12,7 @@ import java.util.List;
 public class DeviceIotDTO {
     private String connectionType;
     private String createdAt;
-    private String deviceStatus;
+    private String device_status;
     private List<EventDTO> events;
     private String fqbn;
     private String href;

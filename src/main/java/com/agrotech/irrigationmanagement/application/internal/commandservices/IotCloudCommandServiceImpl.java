@@ -75,10 +75,7 @@ public class IotCloudCommandServiceImpl implements IotCloudCommandService {
         if (deviceDtos == null)
             throw new IllegalArgumentException("deviceDtos is null");
         AtomicReference<String> status = new AtomicReference<>(new String());
-        deviceDtos.get(0).getEvents().forEach(eventDTO -> {
-            if(eventDTO.getName().equals("r_status"))
-                status.set(eventDTO.getValue());
-        });
+        status.set(deviceDtos.get(0).getDevice_status());
         if(status.get().equals("DISCONNECTED")){
             deviceDtos.get(0).getThing().getProperties().forEach(thingPropertyDTO -> {
                 String[] parts = thingPropertyDTO.getName().split("_");

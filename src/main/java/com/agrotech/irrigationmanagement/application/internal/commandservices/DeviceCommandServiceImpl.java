@@ -59,10 +59,8 @@ public class DeviceCommandServiceImpl implements DeviceCommandService {
                 if (deviceDtos.isEmpty())
                     throw new IllegalArgumentException("Error");
                 AtomicReference<String> status = new AtomicReference<>(new String());
-                deviceDtos.get(0).getEvents().forEach(eventDTO -> {
-                    if(eventDTO.getName().equals("r_status"))
-                        status.set(eventDTO.getValue());
-                });
+                status.set(deviceDtos.get(0).getDevice_status());
+
                 deviceDtos.get(0).getThing().getProperties().forEach(thingPropertyDTO -> {
                     String[] parts = thingPropertyDTO.getName().split("_");
                     Zone zones = new Zone();
