@@ -129,4 +129,61 @@ public class DeviceCommandServiceImpl implements DeviceCommandService {
         }
         return "Rice Crop is not found";
     }
+
+    @Override
+    public String devicesEsp(GetRiceCropByIdQuery query, String deviceName) {
+        RiceCrop riceCrops = riceCropsRepository.findById(query.id()).orElse(null);
+        if(riceCrops != null){
+            try {
+                String[] parts = deviceName.split("_");
+
+                Zone zones = new Zone();
+                Zone zonesData =  zoneRepository.findZonesByName(parts.length == 1 ? "Actuador" : "Parcela " + parts[2]);
+                if(zonesData == null){
+                    zones.setName(parts.length == 1 ? "Actuador" : "Parcela " + parts[2]);
+                    zones.setRiceCrop(riceCrops);
+                    zones.setCreatedAt(LocalDateTime.now(ZoneId.of(Constants.TIME_ZONE_DEFAULT)));
+                    zoneRepository.save(zones);
+                }
+                zonesData =  zoneRepository.findZonesByName(parts.length == 1 ? "Actuador" : "Parcela " + parts[2]);
+                Device devices = deviceRepository.findDevicesByDeviceName(parts.length == 1 ? "Actuador" : "Device " + parts[2]);
+                if(zonesData != null && devices == null){
+                    Device devicesSave = new Device();
+                    devicesSave.setZone(zonesData);
+                    devicesSave.setDeviceModel(parts.length == 1 ? "Esp32 principal" : "Esp32 - " + parts[2]);
+                    devicesSave.setDeviceName(parts.length == 1 ? "Actuador" : "Device " + parts[2]);
+                    devicesSave.setStatus("ACTIVE");
+                    devicesSave.setCreatedAt(LocalDateTime.now(ZoneId.of(Constants.TIME_ZONE_DEFAULT)));
+                    deviceRepository.save(devicesSave);
+                }
+                devices = deviceRepository.findDevicesByDeviceName(parts.length == 1 ? "Actuador" : "Device " + parts[2]);
+                if(parts.length == 1){
+                    Actuator actuators = actuatorRepository.findActuatorsByName("Válvula Solenoide");
+                    if(devices != null && actuators == null){
+                        Actuator actuatorsData = new Actuator();
+                        actuatorsData.setName("Válvula Solenoide");
+                        actuatorsData.setCode(parts[2]);
+                        actuatorsData.setCreatedAt(LocalDateTime.now(ZoneId.of(Constants.TIME_ZONE_DEFAULT)));
+                        actuatorsData.setDevice(devices);
+                        actuatorRepository.save(actuatorsData);
+                    }
+                }
+                else{
+                    Sensor sensors = sensorRepository.findSensorByName(parts[0] + " " + parts[2]);
+                    if(devices != null && sensors == null){
+                        Sensor sensorsData = new Sensor();
+                        sensorsData.setName(parts[0] + " " + parts[2]);
+                        sensorsData.setCode(parts[2]);
+                        sensorsData.setCreatedAt(LocalDateTime.now(ZoneId.of(Constants.TIME_ZONE_DEFAULT)));
+                        sensorsData.setDevice(devices);
+                        sensorRepository.save(sensorsData);
+                    }
+                }
+                return "Devices Iot is created";
+            }catch (Exception e){
+                throw new IllegalArgumentException("Error");
+            }
+        }
+        return "Rice Crop is not found";
+    }
 }

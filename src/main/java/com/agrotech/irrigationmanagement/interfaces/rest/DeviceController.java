@@ -4,6 +4,7 @@ import com.agrotech.irrigationmanagement.domain.model.queries.GetDeviceByZoneIdQ
 import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropByIdQuery;
 import com.agrotech.irrigationmanagement.domain.services.DeviceCommandService;
 import com.agrotech.irrigationmanagement.domain.services.DeviceQueryService;
+import com.agrotech.irrigationmanagement.interfaces.rest.resources.CreateDeviceIotResource;
 import com.agrotech.irrigationmanagement.interfaces.rest.resources.CreateDeviceResource;
 import com.agrotech.irrigationmanagement.interfaces.rest.resources.DeviceResource;
 import com.agrotech.irrigationmanagement.interfaces.rest.transform.CreateDeviceCommandFromResourceAssembler;
@@ -61,5 +62,11 @@ public class DeviceController {
     public String devicesIot(@PathVariable("riceCropId") Long riceCropId){
         var getRiceCrop = new GetRiceCropByIdQuery(riceCropId);
         return deviceService.devicesIot(getRiceCrop);
+    }
+    @PostMapping("/rice-crops/iot")
+    @Operation(tags = {"Device"})
+    public String devicesEsp(@RequestBody CreateDeviceIotResource deviceIot){
+        var getRiceCrop = new GetRiceCropByIdQuery(deviceIot.riceCropId());
+        return deviceService.devicesEsp(getRiceCrop, deviceIot.deviceName());
     }
 }

@@ -25,7 +25,7 @@ public class RiceCropQueryServiceImpl implements RiceCropQueryService {
 
     @Override
     public Optional<RiceCrop> handle(GetRiceCropByFarmerIdAndStatusQuery query) {
-        return Optional.of(riceCropsRepository.findByFarmerIdAndStatus(query.farmerId(), query.status()));
+        return Optional.of(riceCropsRepository.getFirstByFarmerIdAndStatus(query.farmerId(), query.status()));
     }
 
     @Override
