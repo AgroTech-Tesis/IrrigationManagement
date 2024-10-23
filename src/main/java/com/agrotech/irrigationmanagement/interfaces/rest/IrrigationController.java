@@ -49,13 +49,13 @@ public class IrrigationController {
     }
     @GetMapping("/rice-crops/{riceCropId}")
     @Operation(tags = {"Irrigation"})
-    public ResponseEntity<List<IrrigationResource>> getAllByRiceCropId(@PathVariable("riceCropId") Long riceCropId,
+    public ResponseEntity<IrrigationResource> getAllByRiceCropId(@PathVariable("riceCropId") Long riceCropId,
                                         @RequestParam(value = "status", defaultValue = Constants.STATUS_ACTIVE) String status){
-        var getIrrigationAllByRiceCropIdQuery = new GetIrrigationAllByRiceCropIdQuery(riceCropId);
-        var irrigationList = irrigationService.handle(getIrrigationAllByRiceCropIdQuery);
+        var getIrrigationAllByRiceCropIdQuery = new GetIrrigationAllByRiceCropIdQuery(riceCropId, status);
+        var irrigation = irrigationService.handle(getIrrigationAllByRiceCropIdQuery);
 
-        var irrigationResources = irrigationList.stream().map(IrrigationResourceFromEntityAssembler::toResourceFromEntity).toList();
-        return ResponseEntity.ok(irrigationResources);
+        var irrigationResource = IrrigationResourceFromEntityAssembler.toResourceFromEntity(irrigation);
+        return ResponseEntity.ok(irrigationResource);
     }
 
     @PostMapping("")
