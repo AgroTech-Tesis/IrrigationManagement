@@ -32,12 +32,12 @@ public class RiceCrop {
     @OneToMany(mappedBy = "riceCrop", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Irrigation> irrigation;
 
-    public RiceCrop(Long id, String name, String status, LocalDateTime localDateTime, LocalDateTime localDateTime1, Long aLong) {
+    public RiceCrop(Long id, String name, String status, LocalDateTime createdAt, LocalDateTime updatedAt, Long farmerId) {
         this.id = id;
         this.name = name;
         this.status = status;
-        this.createdAt = localDateTime;
-        this.updatedAt = localDateTime1;
-        this.farmerId = aLong;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.farmerId = farmerId;
     }
 }

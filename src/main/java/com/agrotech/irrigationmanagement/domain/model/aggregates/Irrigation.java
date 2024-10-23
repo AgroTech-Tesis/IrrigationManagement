@@ -34,6 +34,14 @@ public class Irrigation {
     @JoinColumn(name = "rice_crop_id")
     private RiceCrop riceCrop;
 
-    public Irrigation(Long id, LocalDateTime localDateTime, LocalDateTime localDateTime1, LocalDateTime localDateTime2, Double aDouble, Integer integer, Integer integer1, String status) {
+    public Irrigation(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime endedAt, Double waterAmount, Integer irrigationNumber, Integer daysPreviousIrrigation, String status) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.endedAt = endedAt;
+        this.waterAmount = waterAmount;
+        this.irrigationNumber = irrigationNumber;
+        this.daysPreviousIrrigation = daysPreviousIrrigation;
+        this.status = status;
     }
 }

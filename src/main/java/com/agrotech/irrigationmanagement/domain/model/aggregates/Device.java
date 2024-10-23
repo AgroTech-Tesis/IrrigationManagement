@@ -40,6 +40,14 @@ public class Device {
     @JoinColumn(name = "zone_id")
     private Zone zone;
 
-    public Device(Long id, String deviceName, String deviceModel, LocalDateTime localDateTime, LocalDateTime localDateTime1, String on, String status, String media) {
+    public Device(Long id, String deviceName, String deviceModel, LocalDateTime createdAt, LocalDateTime updatedAt, String isOn, String status, String media) {
+        this.id = id;
+        this.deviceName = deviceName;
+        this.deviceModel = deviceModel;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.isOn = isOn;
+        this.status = status;
+        this.media = media;
     }
 }

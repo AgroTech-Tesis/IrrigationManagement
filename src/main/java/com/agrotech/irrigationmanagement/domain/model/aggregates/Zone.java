@@ -32,6 +32,11 @@ public class Zone {
     @JoinColumn(name = "rice_crop_id")
     private RiceCrop riceCrop;
 
-    public Zone(Long id, String name, LocalDateTime localDateTime, LocalDateTime localDateTime1, Double aDouble) {
+    public Zone(Long id, String name, LocalDateTime createdAt, LocalDateTime updatedAt, Double waterAmount) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.waterAmount = waterAmount;
     }
 }

@@ -23,6 +23,6 @@ public class NotificationQueryServiceImpl implements NotificationQueryService {
     @Override
     public List<Notification> handle(GetNotificationAllQuery query) {
         Pageable pageable = PageRequest.of(query.pageNumber(), query.pageSize());
-        return notificationRepository.getPagination(pageable);
+        return notificationRepository.getPaginationByDateRange(query.startDate(), query.endDate(), pageable);
     }
 }

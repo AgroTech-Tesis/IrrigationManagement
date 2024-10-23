@@ -27,6 +27,9 @@ public class SensorDataRecord {
     @JoinColumn(name = "sensor_id")
     private Sensor sensor;
 
-    public SensorDataRecord(LocalDateTime localDateTime, Float aFloat, String s) {
+    public SensorDataRecord(LocalDateTime createdAt, Float lastValue, String typeSensor) {
+        this.createdAt = createdAt;
+        this.lastValue = lastValue;
+        this.typeSensor = typeSensor;
     }
 }
