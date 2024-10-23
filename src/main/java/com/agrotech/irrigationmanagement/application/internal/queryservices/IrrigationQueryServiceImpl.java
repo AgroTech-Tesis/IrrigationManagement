@@ -34,7 +34,12 @@ public class IrrigationQueryServiceImpl implements IrrigationQueryService {
         if(riceCrop == null)
             throw new IllegalArgumentException("Error");
         try{
-            return irrigationRepository.getFirstByRiceCropIdAndStatus(query.riceCropId(), query.status());
+            Irrigation irrigation = irrigationRepository.getFirstByRiceCropIdAndStatus(query.riceCropId(), query.status());
+
+            if(irrigation == null)
+                return irrigationRepository.findFirstByRiceCropIdOrderByIdDesc(query.riceCropId());
+            else
+                return irrigation;
         }catch (Exception e){
             throw new IllegalArgumentException("Error");
         }
