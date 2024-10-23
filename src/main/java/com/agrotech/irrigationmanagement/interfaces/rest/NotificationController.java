@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -28,8 +29,10 @@ public class NotificationController {
     @GetMapping()
     @Operation(tags = {"Notification"})
     public ResponseEntity<List<NotificationResource>> getAllNotification(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                                         @RequestParam(value = "size", defaultValue = "10") int size) {
-        var getNotificationAllQuery = new GetNotificationAllQuery(page, size);
+                                                                         @RequestParam(value = "size", defaultValue = "10") int size,
+                                                                         @RequestParam(value = "startDate", required = false) LocalDateTime startDate,
+                                                                         @RequestParam(value = "endDate", required = false) LocalDateTime endDate) {
+        var getNotificationAllQuery = new GetNotificationAllQuery(startDate, endDate, page, size);
         var notificationList = notificationQueryService.handle(getNotificationAllQuery);
 
         var notificationResourceList = notificationList.stream().map(NotificationResourceFromEntityAssembler::toResourceFromEntity).toList();
