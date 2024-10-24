@@ -4,6 +4,7 @@ import com.agrotech.irrigationmanagement.domain.model.aggregates.Device;
 import com.agrotech.irrigationmanagement.domain.model.aggregates.Zone;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetDeviceByIdQuery;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetDeviceByZoneIdQuery;
+import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropsByIdQuery;
 import com.agrotech.irrigationmanagement.domain.services.DeviceQueryService;
 import com.agrotech.irrigationmanagement.infraestructure.persistence.jpa.IDeviceRepository;
 import com.agrotech.irrigationmanagement.infraestructure.persistence.jpa.IZoneRepository;
@@ -24,8 +25,8 @@ public class DeviceQueryServiceImpl implements DeviceQueryService {
     }
 
     @Override
-    public List<Device> handle() {
-        return deviceRepository.findAll();
+    public List<Device> handle(GetRiceCropsByIdQuery query) {
+        return deviceRepository.findByRiceCropId(query.riceCropId());
     }
 
     @Override

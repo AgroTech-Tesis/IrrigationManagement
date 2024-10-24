@@ -2,6 +2,7 @@ package com.agrotech.irrigationmanagement.interfaces.rest;
 
 import com.agrotech.irrigationmanagement.domain.model.queries.GetDeviceByZoneIdQuery;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropByIdQuery;
+import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropsByIdQuery;
 import com.agrotech.irrigationmanagement.domain.services.DeviceCommandService;
 import com.agrotech.irrigationmanagement.domain.services.DeviceQueryService;
 import com.agrotech.irrigationmanagement.interfaces.rest.resources.CreateDeviceIotResource;
@@ -27,10 +28,11 @@ public class DeviceController {
         this.deviceService = deviceService;
         this.deviceQueryService = deviceQueryService;
     }
-    @GetMapping("")
+    @GetMapping("{riceCropId}")
     @Operation(tags = {"Device"})
-    public ResponseEntity<List<DeviceResource>> getAll(){
-        var devices = deviceQueryService.handle();
+    public ResponseEntity<List<DeviceResource>> getAll(@PathVariable("riceCropId") Long riceCropId){
+        var getRiceCropsByIdQuery = new GetRiceCropsByIdQuery(riceCropId);
+        var devices = deviceQueryService.handle(getRiceCropsByIdQuery);
         var deviceResources = devices.stream().map(DeviceResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(deviceResources);
     }
