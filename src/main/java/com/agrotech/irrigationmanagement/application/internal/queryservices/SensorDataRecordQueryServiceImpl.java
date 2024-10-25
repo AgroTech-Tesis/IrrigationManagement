@@ -76,9 +76,14 @@ public class SensorDataRecordQueryServiceImpl implements SensorDataRecordQuerySe
                     .mapToDouble(Double::doubleValue)
                     .average()
                     .orElse(0.0);
+            Double sensor4Avg = sensorTypeValues.getOrDefault("SENSOR DE HUMEDAD RELATIVA", List.of(0.0))
+                    .stream()
+                    .mapToDouble(Double::doubleValue)
+                    .average()
+                    .orElse(0.0);
 
             // Creamos un nuevo objeto SensorDataRecordAverage con los promedios
-            sensorAveragesPerDevice.add(new SensorDataRecordAverage(sensor1Avg, sensor2Avg, sensor3Avg));
+            sensorAveragesPerDevice.add(new SensorDataRecordAverage(sensor1Avg, sensor2Avg, sensor3Avg, sensor4Avg));
         });
 
         return sensorAveragesPerDevice;

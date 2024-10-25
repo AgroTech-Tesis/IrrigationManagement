@@ -85,7 +85,7 @@ public class IotCloudCommandServiceImpl implements IotCloudCommandService {
                         SensorDataRecord sensorDataRecord = new SensorDataRecord();
                         sensorDataRecord.setLastValue(thingPropertyDTO.getLastValue());
                         sensorDataRecord.setCreatedAt(LocalDateTime.now(ZoneId.of(Constants.TIME_ZONE_DEFAULT)));
-                        sensorDataRecord.setTypeSensor(parts[0].equals("caudal") ? "SENSOR DE CAUDAL" : parts[0].equals("temperature") ? "SENSOR DE TEMPERATURA" : parts[0].equals("moisture") ? "SENSOR DE HUMEDAD" : " - ");
+                        sensorDataRecord.setTypeSensor(parts[0].equals("caudal") ? "SENSOR DE CAUDAL" : parts[0].equals("temperature") ? "SENSOR DE TEMPERATURA" : parts[0].equals("moisture") ? "SENSOR DE HUMEDAD" :  parts[0].equals("humidity") ? "SENSOR DE HUMEDAD RELATIVA" : " - ");
                         sensorDataRecord.setSensor(sensors);
                         sensorDataRecordRepository.save(sensorDataRecord);
                     }

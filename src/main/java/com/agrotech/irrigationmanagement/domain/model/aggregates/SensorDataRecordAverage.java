@@ -14,4 +14,5 @@ public class SensorDataRecordAverage {
     private Double flowSensor;
     private Double humiditySensor;
     private Double temperatureSensor;
+    private Double humidityRelativeSensor;
 }
