@@ -31,9 +31,7 @@ public class IrrigationCommandServiceImpl implements IrrigationCommandService {
         RiceCrop riceCrops = riceCropsRepository.findById(command.riceCropId()).orElse(null);
         if(riceCrops == null)
             throw new IllegalArgumentException("rice crop not found");
-        System.out.println(command.daysPreviousIrrigation());
         var irrigation = IrrigationFromCreateIrrigationCommand.toResourceFromEntity(command);
-        System.out.println(irrigation.getDaysPreviousIrrigation());
         try {
             irrigation.setRiceCrop(riceCrops);
             irrigation.setWaterAmount(0.0);

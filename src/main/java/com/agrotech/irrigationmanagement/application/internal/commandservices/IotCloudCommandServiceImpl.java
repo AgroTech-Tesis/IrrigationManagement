@@ -54,7 +54,6 @@ public class IotCloudCommandServiceImpl implements IotCloudCommandService {
         }
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + tokenDTO.getAccess_token());
-        System.out.println(headers);
         return iotRESTClient.getDashboard(headers);
     }
 

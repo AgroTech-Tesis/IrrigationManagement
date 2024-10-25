@@ -32,8 +32,6 @@ public class NotificationController {
                                                                          @RequestParam(value = "size", defaultValue = "10") int size,
                                                                          @RequestParam(value = "startDate", required = false) LocalDateTime startDate,
                                                                          @RequestParam(value = "endDate", required = false) LocalDateTime endDate) {
-        System.out.println("startDate: " + startDate);
-        System.out.println("endDate: " + endDate);
         var getNotificationAllQuery = new GetNotificationAllQuery(startDate, endDate, page, size);
         var notificationList = notificationQueryService.handle(getNotificationAllQuery);
 

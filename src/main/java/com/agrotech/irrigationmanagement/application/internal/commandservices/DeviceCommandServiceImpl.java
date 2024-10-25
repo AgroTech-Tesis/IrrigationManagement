@@ -56,22 +56,16 @@ public class DeviceCommandServiceImpl implements DeviceCommandService {
         if(riceCrops != null){
             try {
                 List<DeviceIotDTO> deviceDtos = iotCloudCommandService.getDevices();
-                System.out.println('0');
                 if (deviceDtos.isEmpty())
                     throw new IllegalArgumentException("Error");
 
                 AtomicReference<String> status = new AtomicReference<>(new String());
-                System.out.println('1');
                 status.set(deviceDtos.get(0).getDevice_status());
-                System.out.println('2');
-                System.out.println(status);
 
                 deviceDtos.get(0).getThing().getProperties().forEach(thingPropertyDTO -> {
                     String[] parts = thingPropertyDTO.getName().split("_");
                     Zone zones = new Zone();
                     Zone zonesData =  zoneRepository.findZonesByName(parts.length == 1 ? "Actuador" : "Parcela " + parts[2]);
-                    System.out.println('3');
-                    System.out.println(status);
                     if(zonesData == null){
                         zones.setName(parts.length == 1 ? "Actuador" : "Parcela " + parts[2]);
                         zones.setRiceCrop(riceCrops);
