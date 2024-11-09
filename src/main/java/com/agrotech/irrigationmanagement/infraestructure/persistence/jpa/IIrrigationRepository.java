@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface IIrrigationRepository extends JpaRepository<Irrigation, Long> {
     List<Irrigation> findAll();
-    @Query("SELECT i FROM Irrigation i WHERE i.riceCrop.id = :riceCropId ORDER BY i.createdAt DESC LIMIT 1")
-    List<Irrigation> findAllByRiceCropId(Long riceCropId);
+    Irrigation findFirstByRiceCropIdOrderByIdDesc(Long riceCropId);
+    Irrigation getFirstByRiceCropIdAndStatus(Long riceCropId, String status);
     Irrigation findIrrigationEntitiesById(Long id);
 
 }

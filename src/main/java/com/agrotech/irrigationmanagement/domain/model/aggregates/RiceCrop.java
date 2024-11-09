@@ -16,15 +16,15 @@ public class RiceCrop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tx_name", length = 40)
+    @Column(name = "name", length = 40)
     private String name;
-    @Column(name = "tx_status", length = 40)
+    @Column(name = "status", length = 40)
     private String status;
-    @Column(name = "tx_created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "tx_update_at")
+    @Column(name = "update_at")
     private LocalDateTime updatedAt;
-    @Column(name = "tx_farmer_id")
+    @Column(name = "farmer_id")
     private Long farmerId;
 
     @OneToMany(mappedBy = "riceCrop", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,12 +32,12 @@ public class RiceCrop {
     @OneToMany(mappedBy = "riceCrop", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Irrigation> irrigation;
 
-    public RiceCrop(Long id, String name, String status, LocalDateTime localDateTime, LocalDateTime localDateTime1, Long aLong) {
+    public RiceCrop(Long id, String name, String status, LocalDateTime createdAt, LocalDateTime updatedAt, Long farmerId) {
         this.id = id;
         this.name = name;
         this.status = status;
-        this.createdAt = localDateTime;
-        this.updatedAt = localDateTime1;
-        this.farmerId = aLong;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.farmerId = farmerId;
     }
 }

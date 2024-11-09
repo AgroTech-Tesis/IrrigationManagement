@@ -29,14 +29,17 @@ public class IrrigationQueryServiceImpl implements IrrigationQueryService {
     }
 
     @Override
-    public List<Irrigation> handle(GetIrrigationAllByRiceCropIdQuery query) {
+    public Irrigation handle(GetIrrigationAllByRiceCropIdQuery query) {
         RiceCrop riceCrop = riceCropsRepository.findById(query.riceCropId()).orElse(null);
         if(riceCrop == null)
             throw new IllegalArgumentException("Error");
         try{
-            List<Irrigation> irrigationList = irrigationRepository.findAllByRiceCropId(query.riceCropId());
-            System.out.println(irrigationList);
-            return irrigationList;
+            Irrigation irrigation = irrigationRepository.getFirstByRiceCropIdAndStatus(query.riceCropId(), query.status());
+
+            if(irrigation == null)
+                return irrigationRepository.findFirstByRiceCropIdOrderByIdDesc(query.riceCropId());
+            else
+                return irrigation;
         }catch (Exception e){
             throw new IllegalArgumentException("Error");
         }

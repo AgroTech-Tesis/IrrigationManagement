@@ -16,22 +16,23 @@ public class Sensor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tx_name", length = 40)
+    @Column(name = "name", length = 40)
     private String name;
-    @Column(name = "tx_code", length = 40)
+    @Column(name = "code", length = 40)
     private String code;
-    @Column(name = "tx_model", length = 40)
+    @Column(name = "model", length = 40)
     private String model;
-    @Column(name = "tx_sensor_value", length = 150)
+    @Column(name = "sensor_value", length = 150)
     private String sensorValue;
-    @Column(name = "tx_created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "tx_update_at")
+    @Column(name = "update_at")
     private LocalDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "device_id")
     private Device device;
+
     @OneToMany(mappedBy = "sensor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SensorDataRecord> sensorDataRecords;
 }

@@ -15,25 +15,33 @@ public class Irrigation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tx_created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "tx_update_at")
+    @Column(name = "update_at")
     private LocalDateTime updatedAt;
-    @Column(name = "tx_ended_at")
+    @Column(name = "ended_at")
     private LocalDateTime endedAt;
-    @Column(name = "tx_water_amount")
+    @Column(name = "water_amount")
     private Double waterAmount;
-    @Column(name = "tx_irrigation_number")
+    @Column(name = "irrigation_number")
     private Integer irrigationNumber;
-    @Column(name = "tx_days_previous_irrigation")
+    @Column(name = "days_previous_irrigation")
     private Integer daysPreviousIrrigation;
-    @Column(name = "tx_status")
+    @Column(name = "status")
     private String status;
 
     @ManyToOne
     @JoinColumn(name = "rice_crop_id")
     private RiceCrop riceCrop;
 
-    public Irrigation(Long id, LocalDateTime localDateTime, LocalDateTime localDateTime1, LocalDateTime localDateTime2, Double aDouble, Integer integer, Integer integer1, String status) {
+    public Irrigation(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime endedAt, Double waterAmount, Integer irrigationNumber, Integer daysPreviousIrrigation, String status) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.endedAt = endedAt;
+        this.waterAmount = waterAmount;
+        this.irrigationNumber = irrigationNumber;
+        this.daysPreviousIrrigation = daysPreviousIrrigation;
+        this.status = status;
     }
 }

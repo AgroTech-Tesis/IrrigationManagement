@@ -9,6 +9,6 @@ import com.agrotech.irrigationmanagement.interfaces.rest.resources.IrrigationSch
 public class CreateIrrigationScheduleCommandFromResourceAssembler {
     public static CreateIrrigationScheduleCommand toResourceFromEntity(CreateIrrigationScheduleResource entity) {
         return new CreateIrrigationScheduleCommand(entity.irrigationTime(), entity.irrigationDate(),
-                entity.name(), entity.riceCropId());
+                entity.name(), entity.riceCropId(), entity.status());
     }
 }

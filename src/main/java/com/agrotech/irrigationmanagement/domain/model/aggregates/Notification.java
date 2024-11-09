@@ -15,10 +15,10 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tx_title", length = 40)
+    @Column(name = "title", length = 40)
     private String title;
-    @Column(name = "tx_body", length = 40)
+    @Column(name = "body", length = 40)
     private String body;
-    @Column(name = "tx_created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

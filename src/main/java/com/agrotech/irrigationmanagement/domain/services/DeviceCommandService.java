@@ -17,4 +17,5 @@ import java.util.Optional;
 public interface DeviceCommandService {
     Optional<Device> handle(CreateDevicesCommand command);
     String devicesIot(GetRiceCropByIdQuery query);
+    String devicesEsp(GetRiceCropByIdQuery query, String deviceName);
 }

@@ -16,17 +16,20 @@ public class SensorDataRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tx_created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "tx_last_value", length = 60)
+    @Column(name = "tx_last_value")
     private Float lastValue;
-    @Column(name = "tx_type_sensor", length = 60)
+    @Column(name = "type_sensor", length = 60)
     private String typeSensor;
 
     @ManyToOne
     @JoinColumn(name = "sensor_id")
     private Sensor sensor;
 
-    public SensorDataRecord(LocalDateTime localDateTime, Float aFloat, String s) {
+    public SensorDataRecord(LocalDateTime createdAt, Float lastValue, String typeSensor) {
+        this.createdAt = createdAt;
+        this.lastValue = lastValue;
+        this.typeSensor = typeSensor;
     }
 }

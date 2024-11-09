@@ -2,8 +2,10 @@ package com.agrotech.irrigationmanagement.interfaces.rest;
 
 import com.agrotech.irrigationmanagement.domain.model.queries.GetDeviceByZoneIdQuery;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropByIdQuery;
+import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropsByIdQuery;
 import com.agrotech.irrigationmanagement.domain.services.DeviceCommandService;
 import com.agrotech.irrigationmanagement.domain.services.DeviceQueryService;
+import com.agrotech.irrigationmanagement.interfaces.rest.resources.CreateDeviceIotResource;
 import com.agrotech.irrigationmanagement.interfaces.rest.resources.CreateDeviceResource;
 import com.agrotech.irrigationmanagement.interfaces.rest.resources.DeviceResource;
 import com.agrotech.irrigationmanagement.interfaces.rest.transform.CreateDeviceCommandFromResourceAssembler;
@@ -26,10 +28,11 @@ public class DeviceController {
         this.deviceService = deviceService;
         this.deviceQueryService = deviceQueryService;
     }
-    @GetMapping("")
+    @GetMapping("{riceCropId}")
     @Operation(tags = {"Device"})
-    public ResponseEntity<List<DeviceResource>> getAll(){
-        var devices = deviceQueryService.handle();
+    public ResponseEntity<List<DeviceResource>> getAll(@PathVariable("riceCropId") Long riceCropId){
+        var getRiceCropsByIdQuery = new GetRiceCropsByIdQuery(riceCropId);
+        var devices = deviceQueryService.handle(getRiceCropsByIdQuery);
         var deviceResources = devices.stream().map(DeviceResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(deviceResources);
     }
@@ -45,7 +48,7 @@ public class DeviceController {
         return ResponseEntity.ok(deviceResources);
     }
 
-    @PostMapping("/zone")
+    @PostMapping("/zones")
     @Operation(tags = {"Device"})
     public ResponseEntity<DeviceResource> createReview(@RequestBody CreateDeviceResource createDeviceResource){
         var createDeviceCommand = CreateDeviceCommandFromResourceAssembler.toResourceFromEntity(createDeviceResource);
@@ -61,5 +64,11 @@ public class DeviceController {
     public String devicesIot(@PathVariable("riceCropId") Long riceCropId){
         var getRiceCrop = new GetRiceCropByIdQuery(riceCropId);
         return deviceService.devicesIot(getRiceCrop);
+    }
+    @PostMapping("/rice-crops/iot")
+    @Operation(tags = {"Device"})
+    public String devicesEsp(@RequestBody CreateDeviceIotResource deviceIot){
+        var getRiceCrop = new GetRiceCropByIdQuery(deviceIot.riceCropId());
+        return deviceService.devicesEsp(getRiceCrop, deviceIot.deviceName());
     }
 }

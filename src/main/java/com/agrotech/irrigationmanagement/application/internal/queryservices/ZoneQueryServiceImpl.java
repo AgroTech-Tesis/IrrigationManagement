@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ZoneQueryServiceImpl implements ZoneQueryService {
@@ -25,7 +26,10 @@ public class ZoneQueryServiceImpl implements ZoneQueryService {
 
     @Override
     public List<Zone> handle() {
-        return zoneRepository.findAll();
+        List<Zone> allZones = zoneRepository.findAll();
+        return allZones.stream()
+                .filter(zone -> !"Actuador".equals(zone.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override

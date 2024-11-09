@@ -62,7 +62,6 @@ public class RiceCropsController {
     @Operation(tags = {"RiceCrops"})
     public ResponseEntity<RiceCropResource> createReview(@RequestBody CreateRiceCropResource createRiceCropResource){
         var createRiceCropCommand = CreateRiceCropCommandFromResourceAssembler.toResourceFromEntity(createRiceCropResource);
-        System.out.println(createRiceCropCommand.farmerId());
         var riceCrop = riceCropsService.handle(createRiceCropCommand);
         if (riceCrop.isEmpty()) return ResponseEntity.badRequest().build();
         var riceCropResource = RiceCropResourceFromEntityAssembler.toResourceFromEntity(riceCrop.get());
