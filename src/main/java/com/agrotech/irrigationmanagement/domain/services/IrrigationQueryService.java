@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public interface IrrigationQueryService {
     List<Irrigation> handle();
+    Optional<Irrigation> handleIrrigation();
     Irrigation handle(GetIrrigationAllByRiceCropIdQuery query);
     Optional<Irrigation> handle(GetIrrigationByIdQuery query);
 }

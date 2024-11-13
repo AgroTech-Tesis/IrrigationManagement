@@ -29,6 +29,14 @@ public class IrrigationQueryServiceImpl implements IrrigationQueryService {
     }
 
     @Override
+    public Optional<Irrigation> handleIrrigation() {
+        Irrigation irrigation = irrigationRepository.findFirstByStatus("ACTIVEd");
+        if (irrigation == null)
+            return null;
+        return Optional.of(irrigation);
+    }
+
+    @Override
     public Irrigation handle(GetIrrigationAllByRiceCropIdQuery query) {
         RiceCrop riceCrop = riceCropsRepository.findById(query.riceCropId()).orElse(null);
         if(riceCrop == null)

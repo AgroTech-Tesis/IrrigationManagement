@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IIrrigationRepository extends JpaRepository<Irrigation, Long> {
     List<Irrigation> findAll();
+    Irrigation findFirstByStatus(String status);
     Irrigation findFirstByRiceCropIdOrderByIdDesc(Long riceCropId);
     Irrigation getFirstByRiceCropIdAndStatus(Long riceCropId, String status);
     Irrigation findIrrigationEntitiesById(Long id);

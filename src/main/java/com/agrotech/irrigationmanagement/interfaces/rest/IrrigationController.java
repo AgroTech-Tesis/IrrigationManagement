@@ -47,6 +47,14 @@ public class IrrigationController {
         var irrigationResources = irrigationList.stream().map(IrrigationResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(irrigationResources);
     }
+    @GetMapping("active")
+    @Operation(tags = {"Irrigation"})
+    public ResponseEntity<IrrigationResource> getActive(){
+        var irrigation = irrigationService.handleIrrigation();
+        if (irrigation == null || irrigation.isEmpty() ) return null;
+        var irrigationResources = IrrigationResourceFromEntityAssembler.toResourceFromEntity(irrigation.get());
+        return ResponseEntity.ok(irrigationResources);
+    }
     @GetMapping("/rice-crops/{riceCropId}")
     @Operation(tags = {"Irrigation"})
     public ResponseEntity<IrrigationResource> getAllByRiceCropId(@PathVariable("riceCropId") Long riceCropId,
