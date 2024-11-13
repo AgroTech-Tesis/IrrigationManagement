@@ -12,6 +12,7 @@ public class PropertyDTO {
     private String href;
     private String id;
     private float lastValue;
+    private float last_value;
     private boolean linkedToTrigger;
     private String name;
     private String permission;
