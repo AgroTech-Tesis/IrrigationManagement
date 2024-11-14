@@ -1,5 +1,6 @@
 package com.agrotech.irrigationmanagement.interfaces.rest;
 
+import com.agrotech.irrigationmanagement.domain.model.aggregates.Device;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetDeviceByZoneIdQuery;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropByIdQuery;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropsByIdQuery;
@@ -8,6 +9,7 @@ import com.agrotech.irrigationmanagement.domain.services.DeviceQueryService;
 import com.agrotech.irrigationmanagement.interfaces.rest.resources.CreateDeviceIotResource;
 import com.agrotech.irrigationmanagement.interfaces.rest.resources.CreateDeviceResource;
 import com.agrotech.irrigationmanagement.interfaces.rest.resources.DeviceResource;
+import com.agrotech.irrigationmanagement.interfaces.rest.resources.UpdateDeviceIotResource;
 import com.agrotech.irrigationmanagement.interfaces.rest.transform.CreateDeviceCommandFromResourceAssembler;
 import com.agrotech.irrigationmanagement.interfaces.rest.transform.DeviceResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.Operation;
@@ -64,6 +66,11 @@ public class DeviceController {
     public String devicesIot(@PathVariable("riceCropId") Long riceCropId){
         var getRiceCrop = new GetRiceCropByIdQuery(riceCropId);
         return deviceService.devicesIot(getRiceCrop);
+    }
+    @PutMapping("")
+    @Operation(tags = {"Device"})
+    public DeviceResource devicesUpdate(@RequestBody UpdateDeviceIotResource deviceIot){
+        return deviceService.deviceUpdate(deviceIot);
     }
     @PostMapping("/rice-crops/iot")
     @Operation(tags = {"Device"})

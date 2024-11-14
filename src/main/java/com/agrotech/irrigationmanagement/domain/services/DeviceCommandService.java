@@ -11,6 +11,8 @@ import com.agrotech.irrigationmanagement.domain.model.commands.CreateActuatorsCo
 import com.agrotech.irrigationmanagement.domain.model.commands.CreateDevicesCommand;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetDeviceByIdQuery;
 import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropByIdQuery;
+import com.agrotech.irrigationmanagement.interfaces.rest.resources.DeviceResource;
+import com.agrotech.irrigationmanagement.interfaces.rest.resources.UpdateDeviceIotResource;
 
 import java.util.Optional;
 
@@ -18,4 +20,5 @@ public interface DeviceCommandService {
     Optional<Device> handle(CreateDevicesCommand command);
     String devicesIot(GetRiceCropByIdQuery query);
     String devicesEsp(GetRiceCropByIdQuery query, String deviceName);
+    DeviceResource deviceUpdate(UpdateDeviceIotResource query);
 }

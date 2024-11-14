@@ -15,5 +15,6 @@ public interface IDeviceRepository extends JpaRepository<Device, Long> {
     List<Device> findByRiceCropId(@Param("riceCropId") Long riceCropId);
 
     Device findDevicesByDeviceName(String name);
+    Device findDevicesById(Long id);
     List<Device> findAllByZoneId(Long zoneId);
 }

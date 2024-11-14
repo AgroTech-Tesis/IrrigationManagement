@@ -8,7 +8,11 @@ import com.agrotech.irrigationmanagement.domain.model.queries.GetDeviceByIdQuery
 import com.agrotech.irrigationmanagement.domain.model.queries.GetRiceCropByIdQuery;
 import com.agrotech.irrigationmanagement.domain.services.DeviceCommandService;
 import com.agrotech.irrigationmanagement.infraestructure.persistence.jpa.*;
+import com.agrotech.irrigationmanagement.interfaces.rest.resources.DeviceResource;
+import com.agrotech.irrigationmanagement.interfaces.rest.resources.UpdateDeviceIotResource;
+import com.agrotech.irrigationmanagement.interfaces.rest.transform.CreateSensorDataCommandFromResourceAssembler;
 import com.agrotech.irrigationmanagement.interfaces.rest.transform.DeviceFromCreateDeviceCommand;
+import com.agrotech.irrigationmanagement.interfaces.rest.transform.DeviceResourceFromEntityAssembler;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -179,5 +183,17 @@ public class DeviceCommandServiceImpl implements DeviceCommandService {
             }
         }
         return "Rice Crop is not found";
+    }
+
+    @Override
+    public DeviceResource deviceUpdate(UpdateDeviceIotResource query) {
+        try {
+            Device device = deviceRepository.findDevicesById(query.deviceId());
+            device.setStatus(query.status());
+            deviceRepository.save(device);
+            return DeviceResourceFromEntityAssembler.toResourceFromEntity(device);
+        }catch (Exception e){
+            throw new IllegalArgumentException("Error");
+        }
     }
 }
