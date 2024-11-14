@@ -49,11 +49,9 @@ public class IrrigationController {
     }
     @GetMapping("active")
     @Operation(tags = {"Irrigation"})
-    public ResponseEntity<IrrigationResource> getActive(){
+    public Boolean getActive(){
         var irrigation = irrigationService.handleIrrigation();
-        if (irrigation == null || irrigation.isEmpty() ) return null;
-        var irrigationResources = IrrigationResourceFromEntityAssembler.toResourceFromEntity(irrigation.get());
-        return ResponseEntity.ok(irrigationResources);
+        return irrigation != null && irrigation.isPresent();
     }
     @GetMapping("/rice-crops/{riceCropId}")
     @Operation(tags = {"Irrigation"})

@@ -30,7 +30,7 @@ public class IrrigationQueryServiceImpl implements IrrigationQueryService {
 
     @Override
     public Optional<Irrigation> handleIrrigation() {
-        Irrigation irrigation = irrigationRepository.findFirstByStatus("ACTIVEd");
+        Irrigation irrigation = irrigationRepository.findFirstByStatus("ACTIVE");
         if (irrigation == null)
             return null;
         return Optional.of(irrigation);
