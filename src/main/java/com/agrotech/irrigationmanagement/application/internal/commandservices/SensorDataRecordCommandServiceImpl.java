@@ -1,5 +1,6 @@
 package com.agrotech.irrigationmanagement.application.internal.commandservices;
 
+import com.agrotech.irrigationmanagement.Util.Shared.Constants.constants.Constants;
 import com.agrotech.irrigationmanagement.domain.model.aggregates.Sensor;
 import com.agrotech.irrigationmanagement.domain.model.aggregates.SensorDataRecord;
 import com.agrotech.irrigationmanagement.domain.model.aggregates.SensorDataRecordAverage;
@@ -13,6 +14,7 @@ import com.agrotech.irrigationmanagement.infraestructure.persistence.jpa.ISensor
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -30,7 +32,7 @@ public class SensorDataRecordCommandServiceImpl implements SensorDataRecordComma
     public Optional<SensorDataRecord> handle(CreateSensorDataCommand query) {
         try{
             Sensor sensor = sensorRepository.findById(query.sensorId()).orElseThrow(() -> new RuntimeException("Sensor not found"));
-            SensorDataRecord sensorDataRecord = new SensorDataRecord(LocalDateTime.now(), query.lastValue(), query.typeSensor());
+            SensorDataRecord sensorDataRecord = new SensorDataRecord(LocalDateTime.now(ZoneId.of(Constants.TIME_ZONE_DEFAULT)), query.lastValue(), query.typeSensor());
             sensorDataRecord.setSensor(sensor);
             sensorDataRecordRepository.save(sensorDataRecord);
             return Optional.of(sensorDataRecord);
